@@ -9,12 +9,10 @@ import java.util.List;
 
 class SummerProductsReader {
 
-    static List<RatingSummary> readCsv(String file){
+    public List<RatingSummary> readCsv(String file){
         List<RatingSummary> ratingSummaryList = new ArrayList<>();
 
-        try {
-            FileReader filereader = new FileReader(file);
-            CSVReader csvReader = new CSVReader(filereader);
+        try(FileReader filereader = new FileReader(file); CSVReader csvReader = new CSVReader(filereader)) {
             List<String[]> allData = csvReader.readAll();
 
             List<String> header = Arrays.asList(allData.get(0));
@@ -29,12 +27,12 @@ class SummerProductsReader {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return ratingSummaryList;
     }
 
-    private static Integer parseInt(String intToParse) {
+    private Integer parseInt(String intToParse) {
         try {
             return Integer.valueOf(intToParse);
         } catch (NumberFormatException e) {

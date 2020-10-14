@@ -1,6 +1,7 @@
 package procamp;
 
 class Metrics {
+
     private Double averagePrice;
     private Double fiveStarPercentage;
     private String originCountry;
@@ -37,6 +38,9 @@ class Metrics {
 
     @Override
     public String toString() {
-        return averagePrice + "\t" + fiveStarPercentage + "\t" + originCountry;
+        return  String.format("%10s\t%15s\t%14s",
+                averagePrice,
+                (fiveStarPercentage == null ? "no value" : fiveStarPercentage),
+                (originCountry.isEmpty() ? "no value" : originCountry));
     }
 }

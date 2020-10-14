@@ -7,6 +7,12 @@ public class RatingSummary {
     private Integer ratingFiveCount;
     private String originCountry;
 
+    public RatingSummary(Float price, Integer ratingCount, Integer ratingFiveCount, String originCountry) {
+        this.price = price;
+        this.ratingCount = ratingCount;
+        this.ratingFiveCount = ratingFiveCount;
+        this.originCountry = originCountry;
+    }
 
     public Float getPrice() {
         return price;
@@ -40,10 +46,11 @@ public class RatingSummary {
         this.originCountry = originCountry;
     }
 
-    public RatingSummary(Float price, Integer ratingCount, Integer ratingFiveCount, String originCountry) {
-        this.price = price;
-        this.ratingCount = ratingCount;
-        this.ratingFiveCount = ratingFiveCount;
-        this.originCountry = originCountry;
+    public RatingSummary accumulateValues(RatingSummary summary) {
+        price += summary.price;
+        ratingCount += summary.ratingCount;
+        ratingFiveCount += summary.ratingFiveCount;
+        return  this;
     }
+
 }
